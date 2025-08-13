@@ -1,24 +1,24 @@
 pipeline {
     agent any
     environment {
-        AWS_DEFAULT_REGION = "us-east-1"
+        AWS_DEFAULT_REGION = "eu-central-1"
         EKS_CLUSTER_NAME = "eks-cluster"
         EKS_NODE_TYPE = "t2.medium"
         EKS_NODE_COUNT = "3"
-        AWS_ACCOUNT_ID = '124355672501'
+        AWS_ACCOUNT_ID = '730335492891'
         ECR_REPOSITORY = 'jjtech-demo'
         DOCKER_IMAGE_TAG = "${BUILD_NUMBER}"
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
     }
     tools {
-        maven 'localMaven'
+        maven 'localmaven'
         jdk 'localJdk'
     }
     stages {
         stage('Git Checkout') {
             steps {
                 echo 'Cloning the application code...'
-                git branch: 'main', url: 'https://github.com/anselmenumbisia/jjtech-ci-cd-pipeline-project-k8s.git'
+                git branch: 'main', url: 'https://github.com/Agatha-r3/microservices-ci-cd-pipeline.git'
             }
         }
         stage('Install eksctl if needed') {
@@ -269,8 +269,8 @@ pipeline {
     
 //     stage('Build and Push Docker Image') {
 //       environment {
-//         awsAccountId = '124355672501'
-//         region = 'us-east-1'
+//         awsAccountId = '730335492891'
+//         region = 'eu-central-1'
 //         repositoryName = 'jjtech-demo'
 //         dockerImageTag = "${BUILD_NUMBER}"
 //         ecrRegistry = "${awsAccountId}.dkr.ecr.${region}.amazonaws.com"
@@ -315,9 +315,9 @@ pipeline {
 
 //     stage("Deploy to EKS"){
 //         environment {
-//         region = 'us-east-1'
+//         region = ''
 //         clusterName = 'eks-cluster'
-//         awsAccountId = '124355672501'
+//         awsAccountId = '730335492891'
 //       }       
 //         steps {  
 //           script {
